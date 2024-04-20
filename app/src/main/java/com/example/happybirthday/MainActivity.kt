@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -35,8 +36,10 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     // Sends text to GreetingImage Composable
-                    GreetingImage(message = "Happy Birthday Chris!",
-                        from = "From Bob",
+                    GreetingImage(
+                        message = stringResource(R.string.happy_birthday_text),
+                        from = stringResource(R.string.signature_text),
+                        //Sets the Strings to come from res/values/strings.xml so they aren't hardcoded
                     )
                 }
             }
@@ -59,7 +62,7 @@ fun GreetingText(message: String, from: String,  modifier: Modifier = Modifier) 
             fontSize = 36.sp,
             modifier = Modifier
                 .padding(16.dp) //dp = set number of pixels regardless of screen settings
-                .align(alignment = Alignment.End)
+                .align(alignment = Alignment.CenterHorizontally)
         )
     }
 }
@@ -80,7 +83,9 @@ fun GreetingImage(message: String, from: String, modifier: Modifier = Modifier){
         // Retrieves info from GreetingText and puts it in the Box
         GreetingText(message = message,
             from = from,
-            modifier = Modifier.fillMaxSize().padding(8.dp)
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(8.dp)
         )
     }
 }
@@ -90,6 +95,8 @@ fun GreetingImage(message: String, from: String, modifier: Modifier = Modifier){
 @Composable
 fun BirthdayCardPreview() {
     HappyBirthdayTheme {
-        GreetingImage(message = "Happy Birthday Chris!", from = "From Bob")
+        GreetingImage(message = stringResource(R.string.happy_birthday_text),
+            from = stringResource(R.string.signature_text)
+        )
     }
 }
